@@ -40,16 +40,22 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Invalid Input");
                     break;
                 }
+                bankUser u = null;
                 try {
-                    bankUser u = new bankUser(name, id, balance);
-                    users.add(u);
+                    u = new bankUser(name, id, balance);
                 } catch (ArithmeticException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 } catch (myCustomException e) {
                     JOptionPane.showMessageDialog(null, "Own Exception: " + e.getMessage());
                 }
+                Integer val = mp.get(id);
+                if (val != null) {
+                    JOptionPane.showMessageDialog(null, "ID is already taken");
+                    continue;
+                }
                 JOptionPane.showMessageDialog(null, "Added Successfully");
                 mp.put(id, users.size() - 1);
+                users.add(u);
             } else if (x == 2) {
                 type = JOptionPane.showInputDialog(null, "Enter the id");
                 try {
